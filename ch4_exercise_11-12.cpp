@@ -14,7 +14,7 @@ of prime numbers with primes. Consider 2 the first prime.
 vector<int> primes;
 
 bool is_prime(int n) {
-	for (int i = 0; i < primes.size(); ++i)
+	for (int i = 0; i < primes.size() / 2; ++i)
 		if (n % primes[i] == 0) return false;
 	return true;
 }

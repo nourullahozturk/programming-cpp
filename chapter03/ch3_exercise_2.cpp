@@ -10,8 +10,15 @@ int main()
 	constexpr double mi_to_km = 1.609;
 	cout << "Miles to Kilometer Converter\n"
 		<< "Please enter a distance (in miles)\n";
-	double input = 0;
-	while (cin >> input) {
-		cout << input << " miles is " << input * mi_to_km << " kilometer\n";
+	double miles = 0;
+	while (true) {
+		cin >> miles;
+		if (cin)
+			cout << miles << " miles is " << miles * mi_to_km << " kilometer\n";
+		else {
+			cout << "Bad input. Please try again.\n";
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		}
 	}
 }

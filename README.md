@@ -21,3 +21,6 @@ A program to find all the prime numbers between 1 and 100 using a method called 
 
 Error handling with exceptions and pre or post condition checking.
 
+### Chapter 5, Exercise 7 (Instructor's answer)
+
+A program to solve quadratic equations: A systematic approach.

@@ -9,7 +9,11 @@ This repository is compiled from the textbook "Programming Principles and Practi
 
 Making a program to show appropriate error mesage when bad input is given and ask an input again.
 
-### Chapter 10, Exercise 10
+### Chapter 4, Exercise 8
+
+Chess Board With Rice: Exponential Growth
+
+### Chapter 4, Exercise 10
 
 A program to play "Rock", "Paper", "Scissors". Making randomness with fibonacci numbers and a user seed.
 
@@ -24,3 +28,7 @@ Error handling with exceptions and pre or post condition checking.
 ### Chapter 5, Exercise 7 (Instructor's answer)
 
 A program to solve quadratic equations: A systematic approach.
+
+### Chapter 5, Exercise 12
+
+Bulls and Cows Game

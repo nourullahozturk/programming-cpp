@@ -9,16 +9,36 @@ because the user got one digit (1) right and in the right position (a bull)
 and one digit (3) right but in the wrong position (a cow). The guessing
 continues until the user gets four bulls, that is, has the four digits correct
 and in the correct order.
+
+13. The program is a bit tedious because the answer is hard-coded into the
+program. Make a version where the user can play repeatedly (without
+stopping and restarting the program) and each game has a new set of
+four digits. You can get four random digits by calling the random number
+generator randint(10) from std_lib_facilities.h four times. You will note
+that if you run that program repeatedly, it will pick the same sequence of
+four digits each time you start the program. To avoid that, ask the user
+to enter a number (any number) and call srand(n) where n is the number
+the user entered before calling randint(10). Such an n is called a seed, and
+different seeds give different sequences of random numbers.
 */
 
-vector<int> v = { 1, 4, 6, 7 };	// we manually define a 4-digit number for now
+vector<int> v(4);
 vector<int> g(4);	// user's guess
 vector<char> digits = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
 
 int main()
 {
 try {
+	// Initializing the game
 	cout << "Bulls and Cows Game\n";
+	cout << "Please enter a 'seed' number to play:\n";
+	int seed;
+	cin >> seed;
+	if (!cin) error("bad input: seed must be an integer");
+	srand(seed);
+	for (int i = 0; i < v.size(); ++i) v[i] = rand() % 10;
+
+	// Starting the game loop
 	cout << "Enter your guess of a 4-digit number(e.g. 1234):\n";
 	string s;
 	while (cin >> s) { // Game loop
@@ -54,7 +74,11 @@ try {
 		}
 
 		// print the result
-		if (bulls == 4) cout << bulls << " bulls. You guessed it correct!\n";
+		if (bulls == 4) {
+			cout << bulls << " bulls. You guessed it correct!\n"
+				<< "Starting a new game...\nMake a guess:\n";
+			for (int i = 0; i < v.size(); ++i) v[i] = rand() % 10;
+		}
 		else cout << bulls << " bull and " << cows << " cow\n";
 	}
 }

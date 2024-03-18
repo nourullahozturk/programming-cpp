@@ -1,9 +1,15 @@
-#include "std_lib_facilities.h"
-/*
-Simple Calculator Prototype
-Problem with this version is we are doing the operations in the
-wrong order.
 
+//
+// This is an experimental code before writing the "Simple Calculator"
+// program. Purpose of this code is to understand the problem at hand.
+// We undestand that we have a problem of ordering the evaluations of
+// expressions. Current prototype is doing the operations in the wrong
+// order.
+//
+
+#include "std_lib_facilities.h"
+
+/*
 When std::cin fails it is in a failure mode where further input
 operations are ignored. You can try to correct the situation
 (.clear() the failure mode + skip the letter in the input buffer)

@@ -97,6 +97,7 @@ double primary()     // read and evaluate a Primary
 //------------------------------------------------------------------------------
 
 int main()
+{
 try {
 	while (cin)
 		cout << expression() << '\n';
@@ -111,6 +112,7 @@ catch (...) {
 	cerr << "exception \n";
 	keep_window_open("~2");
 	return 2;
+}
 }
 
 //------------------------------------------------------------------------------

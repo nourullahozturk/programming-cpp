@@ -33,10 +33,24 @@ Verb:
 	"swim"
 */
 
+
+/*
+	edited 3/22/2024
+	
+	exit gracefully with "quit" as the start of a sentence.
+	print "(birds fly) but (fish swim)" when the sentence is valid.
+
+*/
+
 vector<string> articles;
 vector<string> nouns;
 vector<string> verbs;
 vector<string> conjunctions;
+
+vector<string> sentences_fp;	// sentences vector for printing later
+vector<string> conjunctions_fp;
+
+bool is_exit = false;
 
 void init()
 // initialize word classes
@@ -90,33 +104,55 @@ bool sentence()
 	string w1;
 	cin >> w1;
 
+	if (w1 == "quit") {
+		is_exit = true;
+		return false;
+	}
+
 	if (!is_article(w1) && !is_noun(w1)) return false;
 
 	if (is_article(w1)) {  // sentence start with an article
+		string s_fp = w1;	// sentence for printing later
+
 		string w2;
 		cin >> w2;
 		if (!is_noun(w2)) return false;
+		s_fp += " " + w2;
 
 		string w3;
 		cin >> w3;
 		if (!is_verb(w3)) return false;
+		s_fp += " " + w3;
+
+		sentences_fp.push_back(s_fp);
 
 		string w4;
 		cin >> w4;
 		if (w4 == ".") return true;  // end of sentence
 		if (!is_conjunction(w4)) return false;  // not end of sentence and not conjunction
+		
+		conjunctions_fp.push_back(w4);
+
 		return sentence();  // look for another sentence
 	}
 
 	if (is_noun(w1)) {  // sentence start with a noun
+		string s_fp = w1;	// sentence for printing later
+
 		string w2;
 		cin >> w2;
 		if (!is_verb(w2)) return false;
+		s_fp += " " + w2;
+
+		sentences_fp.push_back(s_fp);
 
 		string w3;
 		cin >> w3;
 		if (w3 == ".") return true;  // end of sentence
 		if (!is_conjunction(w3)) return false;  // not end of sentence and not conjunction
+		
+		conjunctions_fp.push_back(w3);
+
 		return sentence();  // look for another sentence
 	}
 
@@ -127,17 +163,30 @@ int main()
 {
 try {
 	cout << "enter a sentence of the simplified grammar (terminated by a dot):\n";
-	
+
 	init();		// initialize word tables
 
 	while (cin) {
 		bool b = sentence();
-		if (b)
-			cout << "OK\n";
-		else
-			cout << "not OK\n";
-		cin.ignore(numeric_limits<streamsize>::max(),'\n');  // clear cin
-		cout << "Try again: ";
+
+		if (is_exit) {
+			cout << "exiting\n";
+			break;
+		}
+		else {
+			if (b) {
+				for (int i = 0; i < sentences_fp.size(); ++i) {
+					if(i != 0)
+						cout << conjunctions_fp[i-1] << " ";
+					cout << "(" << sentences_fp[i] << ") ";
+				}
+				cout << "\n";
+			}
+			else
+				cout << "not a valid sentence\n";
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');  // clear cin
+			cout << "Try again: ";
+		}
 	}
 
 }
